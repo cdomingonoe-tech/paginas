@@ -78,7 +78,119 @@
     function saludar() {
         document.getElementById("mensaje").innerHTML = "🔥 Bienvenido a mi página web 🔥";
     }
+</script> 
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tienda de Ropa</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    text-align:center;
+}
+
+header{
+    background:black;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    margin:20px;
+    padding:20px;
+    background:white;
+    border-radius:10px;
+}
+
+/* productos */
+.producto{
+    display:inline-block;
+    margin:15px;
+}
+
+.producto img{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+}
+
+button{
+    padding:10px 20px;
+    background:blue;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ROPA DE MARCA</h1>
+<p>Tu tienda online</p>
+</header>
+
+<div class="container">
+
+<h2>Subir productos</h2>
+
+<input type="file" id="imagen">
+<br><br>
+<input type="text" id="precio" placeholder="Precio">
+<br><br>
+<input type="text" id="nicho" placeholder="Ej: zapatos, ropa">
+<br><br>
+<button onclick="agregarProducto()">Agregar producto</button>
+
+<hr>
+
+<h2>Productos</h2>
+
+<div id="productos"></div>
+
+<hr>
+
+<h2>Concepto (máx 1500 letras)</h2>
+<textarea id="concepto" maxlength="1500" rows="6" cols="40"></textarea>
+
+</div>
+
+<script>
+function agregarProducto(){
+    let archivo = document.getElementById("imagen").files[0];
+    let precio = document.getElementById("precio").value;
+    let nicho = document.getElementById("nicho").value;
+
+    if(!archivo){
+        alert("Sube una imagen");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+        let div = document.createElement("div");
+        div.className = "producto";
+
+        div.innerHTML = `
+            <img src="${e.target.result}">
+            <p>$${precio}</p>
+            <p>${nicho}</p>
+        `;
+
+        document.getElementById("productos").appendChild(div);
+    }
+
+    reader.readAsDataURL(archivo);
+}
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
